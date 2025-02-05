@@ -13,4 +13,4 @@ MS Computer Science student at DePaul University with a strong foundation in sof
 MS Computer Science student at DePaul University, graduating in 2025. My contributions include full-stack development with .NET Core and React, database management with MongoDB, and deployment on Microsoft Azure. With a strong foundation in software engineering and agile methodologies, I focus on building scalable and high-quality software solutions.
 
 ### Sushma [Primary: Frontend/Testing]
-*Add your description here.*
+MS Computer Science student at DePaul University. I contribute to frontend development using React, focusing on building responsive user interfaces. Additionally, I am responsible for ensuring code quality through unit testing and frontend validation.
