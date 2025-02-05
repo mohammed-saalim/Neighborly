@@ -6,8 +6,8 @@ Master's student in Computer Science at DePaul University, graduating in 2025. I
 ### Noor Fathima
 *Add your description here.*
 
-### Lajja
-*Add your description here.*
+### Lajja Desai
+MS Computer Science student at DePaul University with a strong foundation in software development, .NET, React, and agile methodologies. My contributions to a project will include full-stack development expertise, efficient API integration, database management, and adherence to best coding practices. With your experience in team collaboration, problem-solving, and continuous learning, I ensure high-quality software solutions and seamless user experiences.
 
 ### Narasimha
 *Add your description here.*
