@@ -10,7 +10,7 @@ Master's student in Computer Science at DePaul University, graduating in 2025. I
 MS Computer Science student at DePaul University with a strong foundation in software development, .NET, React, and agile methodologies. My contributions to a project will include full-stack development expertise, efficient API integration, database management, and adherence to best coding practices. With your experience in team collaboration, problem-solving, and continuous learning, I ensure high-quality software solutions and seamless user experiences.
 
 ### Narasimha
-*Add your description here.*
+MS Computer Science student at DePaul University, graduating in 2025. I manage backlogs, sprint planning, and overall project workflow. My contributions include architectural planning, full-stack development with .NET Core and React, database management with MongoDB, and deployment on Microsoft Azure. With a strong foundation in software engineering and agile methodologies, I focus on building scalable and high-quality software solutions.
 
 ### Sushma
 *Add your description here.*
