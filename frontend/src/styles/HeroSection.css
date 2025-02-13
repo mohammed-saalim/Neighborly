@@ -1,0 +1,107 @@
+.hero-section {
+    background: url("../assets/images/hero-bg.jpg") center/cover no-repeat;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* 🔥 Subtle overlay to improve text readability */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* 30% Black overlay */
+    z-index: 1;
+}
+
+/* 🔥 Ensure text appears ABOVE the overlay */
+.hero-title, .hero-subtitle, .hero-buttons {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: "Playfair Display", serif;
+    font-size: 48px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Reduced spacing */
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* 🔥 Subtle shadow for readability */
+}
+
+.hero-subtitle {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    font-weight: 300;
+    max-width: 600px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4); /* 🔥 Improves contrast */
+}
+
+.hero-buttons {
+    margin-top: 20px;
+}
+
+/* 🔥 Fix Button Contrast */
+.hero-buttons button {
+    margin: 10px;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* 🔥 Ensure "BECOME A TASKER" Button is Visible */
+.hero-buttons button:nth-child(2) {
+    background-color: #ff6600 !important; /* Bold Orange */
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 32px;  /* Make it slightly smaller */
+    }
+
+    .hero-subtitle {
+        display: none; /* Hide description */
+    }
+
+    .hero-buttons {
+        flex-direction: column; /* Stack buttons */
+        align-items: center; /* Center them */
+        gap: 12px; /* Slightly increase spacing */
+    }
+
+    .hero-buttons button {
+        width: 85%; /* Reduce width slightly for better balance */
+        max-width: 280px; /* Prevent overly stretched buttons */
+        padding: 12px 16px; /* Adjust padding for better touch targets */
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 28px; /* Slightly smaller for very small screens */
+    }
+
+    .hero-buttons button {
+        width: 90%; /* Slightly wider for very small screens */
+        font-size: 16px; /* Reduce text size slightly for compact layout */
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    justify-content: flex-start;  /* Default: Align logo to the left */
+    align-items: center;
+    background-color: #333;
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ✅ Logo Styling */
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ✅ Center logo when screen width is small */
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: center;  /* Center logo */
+    }
+}
