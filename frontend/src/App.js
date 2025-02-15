@@ -1,30 +1,23 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from "./styles/theme";  // Import MUI theme
-import Navbar from "./components/common/Navbar";
-import Footer from "./components/common/Footer";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
+import React, { useState } from "react";
+import Login from "./Login";
+import Signup from "./Signup";
+import { Button, Box } from "@mui/material";
 
-function App() {
+const App = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Ensures consistent baseline styles */}
-      <Router>
-        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-          <Navbar />
-          <main style={{ flex: 1 }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </ThemeProvider>
+    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      {isLogin ? <Login /> : <Signup />}
+      <Button onClick={toggleForm} sx={{ position: "absolute", bottom: 20 }}>
+        {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
+      </Button>
+    </Box>
   );
-}
+};
 
 export default App;
