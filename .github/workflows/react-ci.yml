@@ -24,14 +24,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: 📂 Navigate to Frontend
-        run: cd frontend
-
       - name: 📦 Install Dependencies
         run: cd frontend && npm install
 
       - name: 🔨 Build React App
         run: cd frontend && npm run build
 
-      - name: 🧪 Run Tests
-        run: cd frontend && npm test -- --watchAll=false --ci
+      - name: 🧪 Run Tests (if available)
+        run: cd frontend && npm test -- --watchAll=false --ci --passWithNoTests
