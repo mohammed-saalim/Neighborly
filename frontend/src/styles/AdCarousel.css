@@ -1,0 +1,52 @@
+/* Ad Carousel */
+.ad-carousel {
+    max-width: 700px; /* Increased width for better centering */
+    margin: 20px auto;
+    padding-top: 10px;
+}
+
+/* Image Container */
+.ad-image-container {
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+/* Ad Image */
+.ad-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Increased for better fit */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Overlay Text on Images */
+.ad-text {
+    position: absolute;
+    bottom: 25px; /* Moved text slightly up */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75); /* Increased opacity for better readability */
+    color: white;
+    padding: 10px 15px; /* Increased padding */
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+    max-width: 90%;
+}
+
+/* Adjustments for Small Screens */
+@media (max-width: 768px) {
+    .ad-carousel {
+        max-width: 95%;
+    }
+
+    .ad-text {
+        font-size: 14px; /* Reduce text size for mobile */
+        padding: 6px 10px;
+        bottom: 15px; /* Move text slightly up */
+    }
+}
