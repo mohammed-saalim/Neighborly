@@ -1,0 +1,6 @@
+@NeighborlyJobs_HostAddress = http://localhost:5164
+
+GET {{NeighborlyJobs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
