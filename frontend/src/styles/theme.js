@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#007bff",  // Blue (Find Help button)
+      main: "#007bff",  // Blue (Find Help button, hover effects)
     },
     secondary: {
       main: "#ff5733",  // Orange (Help Someone button)
@@ -19,6 +19,13 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
+    h4: {
+      fontFamily: "'Playfair Display', serif", // ✅ Using Playfair Display for Headers
+      fontWeight: 700,
+      letterSpacing: "1px",
+      textAlign: "center",
+      color: "black",
+    },
   },
 });
 

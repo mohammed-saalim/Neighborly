@@ -1,15 +1,20 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import PanToolIcon from "@mui/icons-material/PanTool"; 
-import { useTheme } from "@mui/material/styles"; // Import theme hook
+import { useTheme } from "@mui/material/styles"; 
+import { useNavigate } from "react-router-dom"; 
 
 function Navbar() {
-  const theme = useTheme(); // Access global theme
+  const theme = useTheme(); 
+  const navigate = useNavigate(); 
 
   return (
     <AppBar position="static" sx={{ backgroundColor: theme.palette.background.secondary, padding: "8px 15px" }}>
       <Toolbar>
-        <Box sx={{ display: "flex", alignItems: "center", color: theme.palette.text.primary }}>
+        <Box 
+          sx={{ display: "flex", alignItems: "center", color: theme.palette.text.primary, cursor: "pointer" }}
+          onClick={() => navigate("/")} // Redirect to homepage
+        >
           <Typography
             variant="h4"
             sx={{
@@ -18,6 +23,7 @@ function Navbar() {
               fontSize: "38px", 
               letterSpacing: 0.5,
               fontStyle: "italic", 
+              color: theme.palette.text.primary,
             }}
           >
             N
@@ -35,6 +41,7 @@ function Navbar() {
               fontWeight: 500,
               position: "relative", 
               top: "5px", 
+              color: theme.palette.text.primary,
             }}
           >
             ly
