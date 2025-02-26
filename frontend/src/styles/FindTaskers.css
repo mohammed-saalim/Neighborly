@@ -1,0 +1,13 @@
+.recommendations-container {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.recommendation-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.recommendation-card:hover {
+    transform: scale(1.05);
+}
