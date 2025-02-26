@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import "../styles/HeroSection.css"; // Importing external CSS
+import "../styles/HeroSection.css"; 
+import { useNavigate } from "react-router-dom";
 
 function HeroSection() {
+  const navigate = useNavigate();
+
   return (
     <Box className="hero-section">
       <Typography variant="h2" className="hero-title">
@@ -15,7 +18,7 @@ function HeroSection() {
 
       {/* Buttons */}
       <Box className="hero-buttons">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => navigate("/post-job")}>
           Find Help
         </Button>
         <Button variant="outlined" color="secondary">

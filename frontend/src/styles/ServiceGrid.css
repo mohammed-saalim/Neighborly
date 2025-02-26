@@ -1,0 +1,17 @@
+.service-grid {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .service-card {
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .service-card:hover {
+    transform: scale(1.05);
+  }
+  
