@@ -6,7 +6,9 @@ import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import PostJob from "./pages/PostJob"; 
+import PostJob from "./pages/PostJob";
+import FindTaskers from "./pages/FindTaskers";
+
 
 function App() {
   return (
@@ -20,10 +22,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/post-job" element={<PostJob />} /> {/* ✅ Add PostJob route */}
+          <Route path="/find-taskers" element={<FindTaskers />} />
+
         </Routes>
           </main>
         <Footer />
-        </div>
+        </div><q></q>
       </Router>
     </ThemeProvider>
   );
