@@ -1,0 +1,38 @@
+/* Full-screen background */
+.login-jobs-container {
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login form box */
+.worker-auth-box {
+    width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Reduced font size for "Neighborly Jobs" */
+.login-title {
+    font-size: 20px !important;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Ensure no extra input styling */
+.worker-auth-box input {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Fix overlapping boxes */
+.worker-auth-box .MuiOutlinedInput-root {
+    border-radius: 8px;
+}

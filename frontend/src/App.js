@@ -1,28 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from "./styles/theme"; 
-import Navbar from "./components/common/Navbar";
-import Footer from "./components/common/Footer";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import PostJob from "./pages/PostJob"; 
+import theme from "./styles/theme"; // Ensure you have a theme file for Material UI
+import Navbar from "./components/common/Navbar"; // Navbar component with the login button
+import Footer from "./components/common/Footer"; // Footer component
+import Home from "./pages/Home"; // Home page
+import Login from "./pages/Login"; // Customer Login page
+import Signup from "./pages/Signup"; // Signup page
+import PostJob from "./pages/PostJob"; // Post job page
+import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Ensures consistent baseline styles */}
+      <CssBaseline /> {/* Ensures consistent baseline styles across browsers */}
       <Router>
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Navbar />
+          <Navbar /> {/* Navbar with Login / Signup button */}
           <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/post-job" element={<PostJob />} /> {/* ✅ Add PostJob route */}
-        </Routes>
+            {/* Define all the routes */}
+            <Routes>
+              <Route path="/" element={<Home />} /> {/* Default route for the homepage */}
+              <Route path="/login" element={<Login />} /> {/* Customer Login route */}
+              <Route path="/signup" element={<Signup />} /> {/* Signup route */}
+              <Route path="/post-job" element={<PostJob />} /> {/* Post job route */}
+              <Route path="/login-jobs" element={<LoginJobs />} /> {/* NEW Worker Login route */}
+            </Routes>
           </main>
-        <Footer />
+          <Footer /> {/* Footer component, remains at the bottom */}
         </div>
       </Router>
     </ThemeProvider>

@@ -1,0 +1,76 @@
+/* Ensure the entire page has a uniform light gray background */
+.login-container {
+  height: 100vh;
+  width: 100%;
+  background-color: #f0f0f0; /* Light gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the login/signup form box */
+.auth-box {
+  width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white; /* Ensures the form has a clean white background */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Typography styles */
+.auth-box h4 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.auth-box h6 {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Input fields styling */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Focus effect for input fields */
+.auth-box input:focus {
+  border-color: #007bff; /* Blue border on focus */
+}
+
+/* Login & Sign Up button styling */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff; /* Blue button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.auth-box button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Toggle between login and sign up text */
+.auth-box p {
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-box p:hover {
+  color: #0056b3; /* Darker blue on hover */
+}

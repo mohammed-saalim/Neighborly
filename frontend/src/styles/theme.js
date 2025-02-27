@@ -27,6 +27,29 @@ const theme = createTheme({
       color: "black",
     },
   },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          padding: "20px",
+          borderRadius: "10px",
+          backgroundColor: "#ffffffcc", // ✅ Light transparent background for cards
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+          textTransform: "none",
+          padding: "10px 20px",
+          borderRadius: "8px",
+        },
+      },
+    },
+  },
 });
 
 export default theme;
+
