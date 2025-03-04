@@ -1,0 +1,140 @@
+/* Recommendations Section */
+.recommendations-container {
+    padding: 50px 10px 30px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f5f5f5; /* Matches background.default */
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Title (Match Post Job page) */
+.recommendations-title {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+
+/* Filters Sidebar */
+.filters-container {
+    padding: 20px;
+    column-gap: 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Sort Dropdown */
+.sort-dropdown {
+    margin-top: 15px;
+}
+
+/* Price Filter */
+.filter-section {
+    margin-top: 20px;
+}
+
+/* Checkbox */
+.filter-checkbox {
+    margin-top: 15px;
+}
+
+/* Tasker Cards */
+.recommendation-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.recommendation-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Enlarged Profile Picture */
+.recommendation-avatar {
+    width: 90px !important;  /* Bigger Profile Pic */
+    height: 90px !important;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 3px solid #ddd;
+}
+
+/* Tasker Info */
+.tasker-info {
+    flex-grow: 1;
+}
+
+/* Tasker Name */
+.recommendation-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: black; /* Matches text.secondary */
+}
+
+/* Rating */
+.recommendation-rating {
+    color: #B0B0B0; /* Matches text.primary */
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Price */
+.recommendation-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #008000;
+}
+
+/* Description */
+.recommendation-description {
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Vehicle Details */
+.recommendation-vehicles {
+    font-size: 14px;
+    color: #B0B0B0; /* Matches text.primary */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+/* Select Button */
+.recommendation-button {
+    background-color: #007bff; /* Matches primary.main */
+    color: white;
+    margin-top: 10px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s ease-in-out;
+}
+
+.recommendation-button:hover {
+    background-color: #0056b3;
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
