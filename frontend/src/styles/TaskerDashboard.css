@@ -1,0 +1,15 @@
+.dashboard-container {
+    padding: 20px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  
+  .task-request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
