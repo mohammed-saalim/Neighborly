@@ -7,6 +7,7 @@ import Footer from "./components/common/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import PostJob from "./pages/PostJob"; 
+import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/post-job" element={<PostJob />} /> {/* ✅ Add PostJob route */}
+          <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} />
         </Routes>
           </main>
         <Footer />
