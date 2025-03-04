@@ -174,32 +174,45 @@ function Recommendations() {
 
             <Grid container spacing={4}>
                 {/* Filters Sidebar */}
-                <Grid item xs={12} md={3} className="filters-container">
-                    <Typography variant="h6" className="filters-title">Filters</Typography>
+                {/* Filters Sidebar */}
+<Grid item xs={12} md={3} className="filters-container">
+    <Typography variant="h6" className="filters-title">Filters</Typography>
 
-                    {/* Sort Dropdown with Spacing */}
-                    <FormControl fullWidth className="sort-dropdown">
-                        <InputLabel>Sort by:</InputLabel>
-                        <Select value={sortBy} onChange={handleSortChange}>
-                            <MenuItem value="recommended">Recommended</MenuItem>
-                            <MenuItem value="priceLow">Price: Low to High</MenuItem>
-                            <MenuItem value="priceHigh">Price: High to Low</MenuItem>
-                            <MenuItem value="rating">Highest Rated</MenuItem>
-                        </Select>
-                    </FormControl>
+    {/* Sort Dropdown with Spacing */}
+    <FormControl fullWidth className="sort-dropdown">
+        <InputLabel>Sort by:</InputLabel>
+        <Select value={sortBy} onChange={handleSortChange}>
+            <MenuItem value="recommended">Recommended</MenuItem>
+            <MenuItem value="priceLow">Price: Low to High</MenuItem>
+            <MenuItem value="priceHigh">Price: High to Low</MenuItem>
+            <MenuItem value="rating">Highest Rated</MenuItem>
+        </Select>
+    </FormControl>
 
-                    {/* Price Range with More Spacing */}
-                    <Box className="filter-section">
-                        <Typography className="filter-label">Price Range</Typography>
-                        <Slider
-                            value={priceRange}
-                            onChange={(event, newValue) => setPriceRange(newValue)}
-                            valueLabelDisplay="auto"
-                            min={10}
-                            max={150}
-                        />
-                    </Box>
-                </Grid>
+    {/* Price Range with More Spacing */}
+    <Box className="filter-section">
+        <Typography className="filter-label">Price Range</Typography>
+        <Slider
+            value={priceRange}
+            onChange={(event, newValue) => setPriceRange(newValue)}
+            valueLabelDisplay="auto"
+            min={10}
+            max={150}
+        />
+    </Box>
+
+    {/* ✅ New Pincode Filter */}
+    <Box className="filter-section">
+        <Typography className="filter-label">Enter Pincode</Typography>
+        <TextField
+            variant="outlined"
+            placeholder="Enter your pincode"
+            fullWidth
+            className="pincode-input"
+        />
+    </Box>
+</Grid>
+
 
                 {/* Taskers List */}
                 <Grid item xs={12} md={9}>
