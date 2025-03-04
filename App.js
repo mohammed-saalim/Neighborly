@@ -11,6 +11,7 @@ import PostJob from "./pages/PostJob"; // Post job page
 import LoginJobs from "./pages/LoginJobs"; // Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage"; // Tasker Dashboard Page
 
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -27,6 +28,7 @@ function App() {
               <Route path="/post-job" element={<PostJob />} /> {/* Post job route */}
               <Route path="/login-jobs" element={<LoginJobs />} /> {/* Worker Login route */}
               <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} /> {/* Tasker Dashboard route */}
+
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}
