@@ -1,11 +1,11 @@
-/* Recommendations Section */
+
 .recommendations-container {
     padding: 50px 10px 30px;
     max-width: 1200px;
     margin: auto;
-    background-color: #f5f5f5; /* Matches background.default */
-    border-radius: 12px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 /* Title (Match Post Job page) */
