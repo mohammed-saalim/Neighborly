@@ -1,8 +1,8 @@
+// src/pages/NeighborlyJobs.js
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box } from "@mui/material";
-import "./Login.css"; // Ensure the CSS file is included
 
-const Login = () => {
+const NeighborlyJobs = () => {
   const [isSignup, setIsSignup] = useState(false);
 
   const toggleAuthMode = () => {
@@ -20,7 +20,7 @@ const Login = () => {
         flexDirection: "column",
       }}
     >
-      {/* Center "Neighborly" above the form */}
+      {/* Center "Neighborly Jobs" above the form */}
       <Box
         sx={{
           display: "flex",
@@ -36,13 +36,14 @@ const Login = () => {
             fontWeight: "bold",
             color: "#333", // Dark color for the text
             textAlign: "center",
+            fontFamily: "'Poppins', sans-serif", // Use the same font as the landing page
           }}
         >
-          Neighborly
+          Neighborly Jobs
         </Typography>
       </Box>
 
-      {/* Login form */}
+      {/* Job Actions Form */}
       <Box
         sx={{
           padding: "30px",
@@ -88,13 +89,14 @@ const Login = () => {
               variant="outlined"
             />
           </div>
+          {/* Orange Button for Job-Related Action */}
           <Button
             variant="contained"
-            color="primary"
+            color="warning" // Material UI has a built-in 'warning' color (orange)
             fullWidth
             sx={{
               mt: 2,
-              backgroundColor: "#007bff",
+              backgroundColor: "#ff7f00", // Custom orange color
               color: "white",
             }}
           >
@@ -114,5 +116,4 @@ const Login = () => {
   );
 };
 
-export default Login;
-
+export default NeighborlyJobs;

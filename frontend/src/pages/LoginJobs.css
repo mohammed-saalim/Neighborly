@@ -1,0 +1,76 @@
+/* Full-screen background for the worker login page */
+.login-jobs-container {
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f0f0; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login box styling */
+.worker-auth-box {
+    width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Typography styling */
+.worker-auth-box h4 {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.worker-auth-box h6 {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Input field styles */
+.worker-auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Focus effect for input fields */
+.worker-auth-box input:focus {
+    border-color: #ff9800; /* Orange border to match the theme */
+}
+
+/* Button styling */
+.worker-auth-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9800; /* Orange color for worker login */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.worker-auth-box button:hover {
+    background-color: #e68900; /* Darker orange on hover */
+}
+
+/* Toggle login/signup link */
+.worker-auth-box p {
+    color: #007bff;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.worker-auth-box p:hover {
+    color: #0056b3;
+}

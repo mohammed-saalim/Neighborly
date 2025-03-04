@@ -1,25 +1,50 @@
 .navbar {
-    display: flex;
-    justify-content: flex-start;  /* Default: Align logo to the left */
-    align-items: center;
+    position: relative;
+    padding: 10px 20px;
     background-color: #333;
-    padding: 15px 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-/* ✅ Logo Styling */
-.navbar .logo {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
     font-size: 24px;
     font-weight: bold;
     color: white;
-}
+  }
+  
+  .nav-links {
+    position: absolute;
+    top: 10px; /* Adjust top margin for better positioning */
+    right: 20px; /* Keep the login button on the right */
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links .MuiButton-root {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .nav-links .MuiButton-root:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Optional: Add styling for modal box if you need it */
+  .popup-box {
+    width: 400px;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
 
-/* ✅ Center logo when screen width is small */
-@media (max-width: 768px) {
-    .navbar {
-        justify-content: center;  /* Center logo */
-    }
-}
+
+
+
