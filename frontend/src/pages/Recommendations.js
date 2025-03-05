@@ -17,6 +17,8 @@ import { useTheme } from "@mui/material/styles";
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineDot } from "@mui/lab";
 import { Star, LocalShipping } from "@mui/icons-material";
 import "../styles/Recommendations.css";
+import TextField from "@mui/material/TextField";
+
 
 const taskersData = [
     {
@@ -175,43 +177,49 @@ function Recommendations() {
             <Grid container spacing={4}>
                 {/* Filters Sidebar */}
                 {/* Filters Sidebar */}
-<Grid item xs={12} md={3} className="filters-container">
-    <Typography variant="h6" className="filters-title">Filters</Typography>
+                <Grid item xs={12} md={3} className="filters-container">
+                    <Typography variant="h6" className="filters-title">Filters</Typography>
 
-    {/* Sort Dropdown with Spacing */}
-    <FormControl fullWidth className="sort-dropdown">
-        <InputLabel>Sort by:</InputLabel>
-        <Select value={sortBy} onChange={handleSortChange}>
-            <MenuItem value="recommended">Recommended</MenuItem>
-            <MenuItem value="priceLow">Price: Low to High</MenuItem>
-            <MenuItem value="priceHigh">Price: High to Low</MenuItem>
-            <MenuItem value="rating">Highest Rated</MenuItem>
-        </Select>
-    </FormControl>
 
-    {/* Price Range with More Spacing */}
-    <Box className="filter-section">
-        <Typography className="filter-label">Price Range</Typography>
-        <Slider
-            value={priceRange}
-            onChange={(event, newValue) => setPriceRange(newValue)}
-            valueLabelDisplay="auto"
-            min={10}
-            max={150}
-        />
-    </Box>
+                    {/* Price Range with More Spacing */}
+                    <Box className="filter-section">
+                        <Typography className="sort-label">Sort by:</Typography>  {/* ✅ Added class to create spacing */}
+                        <FormControl fullWidth className="sort-dropdown">
+                            <Select value={sortBy} onChange={handleSortChange}>
+                                <MenuItem value="recommended">Recommended</MenuItem>
+                                <MenuItem value="priceLow">Price: Low to High</MenuItem>
+                                <MenuItem value="priceHigh">Price: High to Low</MenuItem>
+                                <MenuItem value="rating">Highest Rated</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
 
-    {/* ✅ New Pincode Filter */}
-    <Box className="filter-section">
-        <Typography className="filter-label">Enter Pincode</Typography>
-        <TextField
-            variant="outlined"
-            placeholder="Enter your pincode"
-            fullWidth
-            className="pincode-input"
-        />
-    </Box>
-</Grid>
+                    {/* Price Range Selector with Proper Spacing */}
+                    <Box className="filter-section">
+                        <Typography className="filter-label">Price Range</Typography>
+                        <Slider
+                            value={priceRange}
+                            onChange={(event, newValue) => setPriceRange(newValue)}
+                            valueLabelDisplay="auto"
+                            min={10}
+                            max={150}
+                            className="price-slider"
+                        />
+                    </Box>
+
+
+
+                    {/* ✅ New Pincode Filter */}
+                    <Box className="filter-section">
+                        <Typography className="filter-label">Enter Pincode</Typography>
+                        <TextField
+                            variant="outlined"
+                            placeholder="Enter your pincode"
+                            fullWidth
+                            className="pincode-input"
+                        />
+                    </Box>
+                </Grid>
 
 
                 {/* Taskers List */}

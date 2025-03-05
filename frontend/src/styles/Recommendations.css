@@ -1,4 +1,4 @@
-
+/* Main Container */
 .recommendations-container {
     padding: 50px 10px 30px;
     max-width: 1200px;
@@ -8,7 +8,7 @@
     box-shadow: none;
 }
 
-/* Title (Match Post Job page) */
+/* Title */
 .recommendations-title {
     font-family: "Playfair Display", serif;
     font-size: 32px;
@@ -18,35 +18,79 @@
     padding: 30px;
     margin-bottom: 20px;
 }
+
+/* Filters Container (Ensures Vertical Layout) */
 .filters-container {
     padding: 20px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* ✅ Ensures spacing between filters */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.12);
+    display: block; /* ✅ Use block layout to prevent overlapping */
+    width: 100%; /* ✅ Ensure full width inside Grid */
+    max-width: 300px; /* ✅ Set a proper width limit */
 }
 
-/* Sort Dropdown */
+/* Filters Title */
+.filters-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 15px; /* ✅ Adds spacing below "Filters" */
+}
+
+/* Individual Filter Sections */
+.filter-section {
+    width: 100%;
+    display: block; /* ✅ Ensures each section stacks */
+    margin-bottom: 20px; /* ✅ Extra space between sections */
+}
+
+/* Sort Dropdown Section */
 .sort-dropdown {
+    width: 100%;
+    margin-top: 10px; /* ✅ Adds space above dropdown */
+    margin-bottom: 20px; /* ✅ Adds space below dropdown */
+}
+/* Sort Label */
+.sort-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 5px; /* ✅ Adds space between "Sort by:" and dropdown */
+    display: block; /* ✅ Ensures it's on its own line */
+}
+
+.sort-dropdown .MuiInputLabel-root {
+    font-weight: bold;
+    color: #222;
+}
+
+.sort-dropdown .MuiOutlinedInput-root {
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Price Range Slider */
+.MuiSlider-root {
+    color: #007bff !important;
+    width: 100%;
+    display: block; /* ✅ Forces it onto a new line */
+}
+
+/* Pincode Input */
+.pincode-input {
+    width: 100%;
     margin-top: 10px;
 }
 
-/* Price Filter */
-.filter-section {
-    margin-top: 20px;
+.pincode-input .MuiOutlinedInput-root {
+    border-radius: 8px;
+    width: 100%;
 }
 
-/* Pincode Filter */
-.pincode-input {
-    margin-top: 15px;
-}
-
-
-/* Checkbox */
-.filter-checkbox {
-    margin-top: 15px;
+.pincode-input .MuiInputLabel-root {
+    font-weight: bold;
+    color: #222;
 }
 
 /* Tasker Cards */
@@ -66,9 +110,9 @@
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* Enlarged Profile Picture */
+/* Profile Picture */
 .recommendation-avatar {
-    width: 90px !important;  /* Bigger Profile Pic */
+    width: 90px !important;
     height: 90px !important;
     border-radius: 50%;
     margin-right: 20px;
@@ -84,12 +128,12 @@
 .recommendation-name {
     font-size: 18px;
     font-weight: bold;
-    color: black; /* Matches text.secondary */
+    color: black;
 }
 
 /* Rating */
 .recommendation-rating {
-    color: #B0B0B0; /* Matches text.primary */
+    color: #B0B0B0;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -113,7 +157,7 @@
 /* Vehicle Details */
 .recommendation-vehicles {
     font-size: 14px;
-    color: #B0B0B0; /* Matches text.primary */
+    color: #B0B0B0;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -122,7 +166,7 @@
 
 /* Select Button */
 .recommendation-button {
-    background-color: #007bff; /* Matches primary.main */
+    background-color: #007bff;
     color: white;
     margin-top: 10px;
     padding: 10px 18px;
@@ -140,4 +184,44 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+}
+
+/* Ensure Filters Don't Overlap and Stay in Column */
+@media (max-width: 1024px) {
+    .filters-container {
+        width: 100%;
+    }
+
+    .sort-dropdown, .pincode-input, .filter-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .recommendations-container {
+        padding: 30px 5px;
+    }
+
+    .filters-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .sort-dropdown, .pincode-input, .filter-section {
+        width: 100%;
+    }
+
+    .recommendation-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .recommendation-avatar {
+        margin: auto;
+        margin-bottom: 15px;
+    }
+
+    .tasker-info {
+        text-align: center;
+    }
 }
