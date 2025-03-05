@@ -1,9 +1,6 @@
 # Node.js dependencies
-node_modules/*
-!node_modules/@mui
-!node_modules/@mui/material
-!node_modules/@mui/lab
-!node_modules/@mui/icons-material
+node_modules/
+
 
 
 npm-debug.log*
