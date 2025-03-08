@@ -21,7 +21,7 @@ function HeroSection() {
         <Button variant="contained" color="primary" onClick={() => navigate("/post-job")}>
           Find Help
         </Button>
-        <Button variant="outlined" color="secondary">
+        <Button variant="outlined" color="secondary" onClick={() => navigate("/tasker-dashboard")} >
           Help Someone
         </Button>
       </Box>
