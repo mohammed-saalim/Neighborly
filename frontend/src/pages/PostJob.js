@@ -81,7 +81,7 @@ function PostJob() {
               <Paper
                 className="service-card"
                 onClick={() =>
-                  service.name === "All Services" ? setOpenModal(true) : navigate(`/post-job/${service.name.toLowerCase()}`)
+                  service.name === "All Services" ? setOpenModal(true) : navigate(`/task-form/${service.name.toLowerCase()}`)
                 }
               >
                 <Box className="service-card-content">
@@ -122,7 +122,7 @@ function PostJob() {
                   variant="contained"
                   className="service-btn"
                   onClick={() => {
-                    navigate(`/post-job/${service.toLowerCase()}`);
+                    navigate(`/task-form/${service.toLowerCase()}`);
                     setOpenModal(false);
                   }}
                 >
