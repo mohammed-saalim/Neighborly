@@ -10,7 +10,7 @@ namespace Neighborly.Jobs.DTOs
         public DateTime DatePosted { get; set; } = DateTime.Now;
         // public JobCategoryDto Category { get; set; } = new JobCategoryDto();
         public decimal Price { get; set; } = 0;
-        public string Zipcode { get; set; }
+        public string? Zipcode { get; set; }
 
     }
 

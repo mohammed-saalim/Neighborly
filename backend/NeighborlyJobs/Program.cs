@@ -1,27 +1,58 @@
 using Neighborly.Jobs.ServiceProvider;
 using Neighborly.Jobs.ServiceProvider.Interface;
 using Neighborly.Jobs.RequestHandler;
+using Neighborly.Auth.RequestHandler;
 using Neighborly.Jobs.Endpoints;
-using Neighborly.Jobs.Mappers;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+using Neighborly.Auth.Endpoints;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Neighborly.Auth.Middleware; // ✅ Add this line
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// 🔹 Load JWT Configuration
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"] ?? "DEFAULT_SECRET_KEY");
+
+// 🔹 Configure JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+// 🔹 Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DbServiceProvider>();
-builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddSingleton<UserServiceProvider>();
+builder.Services.AddScoped<AuthRequestHandler>();
 builder.Services.AddScoped<JobRequestHandler>();
-
-// AutoMapper Configuration
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //Lajja
+builder.Services.AddSingleton<JwtService>(); // 🔹 Add this line
+builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// 🔹 Configure Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -30,13 +61,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// 🔹 Enable Authentication & Authorization Middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
-// app.MapGet("/", () =>
-// {
-//     return "Jurgen Klopp - From Doubters to Believers!";
-// });
-
 app.MapJobEndpoints();
+app.MapAuthEndpoints(); // ✅ Register Authentication Routes
 
 app.Run();
