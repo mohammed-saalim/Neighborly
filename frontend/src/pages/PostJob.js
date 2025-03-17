@@ -81,7 +81,7 @@ function PostJob() {
               <Paper
                 className="service-card"
                 onClick={() =>
-                  service.name === "All Services" ? setOpenModal(true) : navigate(`/task-form/${service.name.toLowerCase()}`)
+                  service.name === "All Services" ? setOpenModal(true) : navigate(service.name === "Moving" ? "/task-form/moving" : `/task-form/${service.name.toLowerCase()}`)
                 }
               >
                 <Box className="service-card-content">

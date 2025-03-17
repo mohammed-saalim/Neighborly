@@ -35,5 +35,26 @@ namespace Neighborly.Jobs.RequestHandler
              var job = _mapper.Map<JobDto, Job>(jobDto); 
             return Results.Created($"/jobs/{jobDto.Title}", jobDto);
         }
+
+        public async Task<IResult> AddTaskAsync(TaskDto taskDto)
+{
+    Console.WriteLine("🔍 Received TaskDto in JobRequestHandler:");
+    Console.WriteLine($"Title: {taskDto.Title}");
+    Console.WriteLine($"Description: {taskDto.Description}");
+    Console.WriteLine($"Zipcode: {taskDto.Zipcode}");
+
+    try
+    {
+        await _jobService.AddTaskAsync(taskDto);
+        Console.WriteLine("✅ Task Successfully Passed to Service Layer!");
+        return Results.Created($"/tasks/{taskDto.Title}", taskDto);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Error in AddTaskAsync: {ex.Message}");
+        return Results.Problem($"Server Error: {ex.Message}");
+    }
+}
+
     }
 }

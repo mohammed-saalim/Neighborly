@@ -12,6 +12,7 @@ import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
+import MovingTaskForm from "./components/MovingTaskForm";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} />
               <Route path="/chat" element={<Chat currentUser="User1" chatPartner="User2" />} />
               <Route path="/task-form/:service" element={<TaskForm />} />
+              <Route path="/task-form/moving" element={<MovingTaskForm />} />
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}

@@ -41,5 +41,20 @@ namespace Neighborly.Jobs.ServiceProvider
             var job = _mapper.Map<Job>(jobDto);
             await _job.InsertOneAsync(job);
         }
+
+        public async Task AddTaskAsync(TaskDto taskDto)
+         {
+        Console.WriteLine("Received TaskDto in Service Layer:");
+        Console.WriteLine($"Title: {taskDto.Title}, Description: {taskDto.Description}, Zipcode: {taskDto.Zipcode}");
+
+        var task = _mapper.Map<Job>(taskDto);
+
+        Console.WriteLine("Mapped Job Object:");
+        Console.WriteLine($"Title: {task.Title}, Description: {task.Description}, Zipcode: {task.Zipcode}");
+
+        await _job.InsertOneAsync(task);
+
+        Console.WriteLine("✅ Task Inserted Successfully!");
+        }
     }
 }

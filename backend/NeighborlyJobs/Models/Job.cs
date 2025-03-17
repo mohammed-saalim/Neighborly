@@ -18,6 +18,17 @@ namespace Neighborly.Jobs.Models
         public required string Zipcode { get; set; }
 
         public string Address { get; set; }
+
+        // New fields for tasks
+        public string? TaskSize { get; set; } // Small, Medium, Large
+        public string? ServiceType { get; set; } // Moving, Cleaning, etc.
+
+        public string Unit { get; set; }
+
+        // Specific to Moving tasks
+        public string? PickupLocation { get; set; }
+        public string? DropoffLocation { get; set; }
+        public int? NumItems { get; set; } // Only for moving
     }
 
     public class JobCategory

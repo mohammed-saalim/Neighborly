@@ -15,11 +15,40 @@ const TaskForm = () => {
     setTaskData({ ...taskData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Task submitted:", {...taskData, service});
-    // Here, you can add a function to send data to your backend
-  };
+
+    const taskDataWithService = { 
+        ...taskData, 
+        serviceType: service, // Pass service type
+        title: taskData.title, // Modify as needed
+        zipcode: taskData.zipcode, // Replace with actual zip code field
+        unit: taskData.unit, // Ensure Unit/Apt is included
+    };
+
+    try {
+        const response = await fetch("http://localhost:5083/tasks", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(taskDataWithService),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${response.statusText}`);
+        }
+
+        // Handle empty response correctly
+        const text = await response.text();
+        const result = text ? JSON.parse(text) : {};
+
+        console.log("Task submitted successfully:", result);
+        alert("Task submitted successfully!");
+    } catch (error) {
+        console.error("Error submitting task:", error);
+        alert(`Submission failed: ${error.message}`);
+    }
+};
+
 
   return (
     <div className="task-form-container">
