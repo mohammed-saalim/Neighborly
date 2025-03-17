@@ -48,7 +48,20 @@ builder.Services.AddScoped<AuthRequestHandler>();
 builder.Services.AddScoped<JobRequestHandler>();
 builder.Services.AddSingleton<JwtService>(); // 🔹 Add this line
 builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddSingleton<WorkerServiceProvider>();
+builder.Services.AddScoped<WorkerAuthRequestHandler>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -61,11 +74,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAll");
+
 // 🔹 Enable Authentication & Authorization Middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapJobEndpoints();
 app.MapAuthEndpoints(); // ✅ Register Authentication Routes
+app.MapWorkerAuthEndpoints();
 
 app.Run();

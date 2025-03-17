@@ -1,22 +1,19 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Text.Json.Serialization;
 using BCrypt.Net;
 
 namespace Neighborly.Jobs.Models
 {
-    public class User
+    public class Worker
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
         public required string FullName { get; set; }
-
         public required string Email { get; set; }
-
-        [JsonPropertyName("passwordHash")]  // ✅ Ensures JSON maps to `passwordHash`
         public required string PasswordHash { get; set; }
+        public required string SsnId { get; set; } // ✅ Added SSN ID field
 
         public void SetPassword(string password)
         {

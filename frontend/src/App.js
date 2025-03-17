@@ -6,7 +6,6 @@ import Navbar from "./components/common/Navbar"; // Navbar component with the lo
 import Footer from "./components/common/Footer"; // Footer component
 import Home from "./pages/Home"; // Home page
 import Login from "./pages/Login"; // Customer Login page
-import Signup from "./pages/Signup"; // Signup page
 import PostJob from "./pages/PostJob"; // Post job page
 import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage";
@@ -26,7 +25,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} /> {/* Default route for the homepage */}
               <Route path="/login" element={<Login />} /> {/* Customer Login route */}
-              <Route path="/signup" element={<Signup />} /> {/* Signup route */}
               <Route path="/post-job" element={<PostJob />} /> {/* Post job route */}
               <Route path="/login-jobs" element={<LoginJobs />} /> {/* NEW Worker Login route */}
               <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} />
