@@ -29,8 +29,7 @@ namespace Neighborly.Auth.Endpoints
                 });
             });
 
-            // ✅ NEW: Profile Update Endpoint (Using DTO)
-            routes.MapPut("/api/user/profile", [Authorize] async (HttpContext http, UserServiceProvider _userService, UpdateUser updatedUser) =>
+            routes.MapPut("/api/user/profile", [Authorize] (HttpContext http, UserServiceProvider _userService, UpdateUser updatedUser) =>
             {
                 var userId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (userId == null) return Results.Unauthorized();
@@ -38,15 +37,15 @@ namespace Neighborly.Auth.Endpoints
                 var existingUser = _userService.GetUserById(userId);
                 if (existingUser == null) return Results.NotFound("User not found");
 
-                // ✅ Ensure null values do not overwrite existing data
-                var newFullName = !string.IsNullOrEmpty(updatedUser.FullName) ? updatedUser.FullName : existingUser.FullName;
-                var newAddress = !string.IsNullOrEmpty(updatedUser.Address) ? updatedUser.Address : existingUser.Address;
-                var newPhone = !string.IsNullOrEmpty(updatedUser.Phone) ? updatedUser.Phone : existingUser.Phone;
+                var newFullName = !string.IsNullOrEmpty(updatedUser.FullName) ? updatedUser.FullName : existingUser.FullName ?? "User";
+                var newAddress = !string.IsNullOrEmpty(updatedUser.Address) ? updatedUser.Address : existingUser.Address ?? "";
+                var newPhone = !string.IsNullOrEmpty(updatedUser.Phone) ? updatedUser.Phone : existingUser.Phone ?? "";
 
                 _userService.UpdateUserProfile(userId, newFullName, newAddress, newPhone);
                 
                 return Results.Ok("Profile updated successfully.");
             });
+
         }
     }
 }
