@@ -24,6 +24,9 @@ namespace Neighborly.Auth.RequestHandler
 
         public IResult Register(User user)
         {
+            if (user == null)
+                return Results.BadRequest("Invalid request data."); // ✅ Handle null case
+
             if (_userService.GetUserByEmail(user.Email) != null)
                 return Results.BadRequest("User already exists.");
 
@@ -33,7 +36,8 @@ namespace Neighborly.Auth.RequestHandler
             return Results.Ok("User registered successfully.");
         }
 
-        public IResult Login(User user)
+
+        public IResult Login(UserLogin user)
         {
             var dbUser = _userService.GetUserByEmail(user.Email);
             if (dbUser == null || !_userService.VerifyPassword(user.PasswordHash, dbUser.PasswordHash))

@@ -3,14 +3,14 @@ import { Button, TextField, Typography, Box, Paper, Alert, CircularProgress } fr
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // ✅ Used for redirection
 
-const API_BASE_URL = "http://localhost:5083/api/auth";
+const API_BASE_URL = "http://localhost:5083/api/auth"; // ✅ Backend URL for user authentication
 
 const Login = () => {
   const navigate = useNavigate(); // ✅ React Router navigation
-  const [isSignup, setIsSignup] = useState(false); // Toggle login/signup
+  const [isSignup, setIsSignup] = useState(false);
+  const [fullName, setFullName] = useState(""); // ✅ Full Name for signup
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState(""); // ✅ Full Name for Signup
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -18,44 +18,52 @@ const Login = () => {
     e.preventDefault();
     setMessage(null);
     setLoading(true);
-
+  
     try {
       if (isSignup) {
-        // ✅ Step 1: First Register User
+        console.log("📌 Sending Register Request:", { fullName, email, passwordHash: password });
+
         const signupResponse = await axios.post(`${API_BASE_URL}/register`, {
+          fullName, // ✅ Ensure this is included
           email,
           passwordHash: password,
-          fullName, // ✅ Sending Full Name
         });
 
+        console.log("✅ Registration Response:", signupResponse.data);
+
         if (signupResponse.status === 200) {
-          // ✅ Step 2: Automatically Log in User after Signup
+          console.log("✅ Registration Successful, Logging in...");
           const loginResponse = await axios.post(`${API_BASE_URL}/login`, {
             email,
             passwordHash: password,
           });
 
-          if (loginResponse.data.token) {
-            localStorage.setItem("token", loginResponse.data.token); // ✅ Save JWT token
-            navigate("/post-job"); // ✅ Redirect to Post Job Page
+          console.log("📌 API Login Response:", loginResponse.data);
+
+          if (loginResponse.data?.token) {
+            localStorage.setItem("userToken", loginResponse.data.token);
+            setTimeout(() => navigate("/post-job"), 1000); // ✅ Redirect after short delay
           }
         }
       } else {
-        // ✅ If it's a login request
+        console.log("📌 Sending Login Request:", { email, passwordHash: password });
+
         const loginResponse = await axios.post(`${API_BASE_URL}/login`, {
           email,
           passwordHash: password,
         });
 
-        if (loginResponse.data.token) {
-          localStorage.setItem("token", loginResponse.data.token);
-          navigate("/post-job"); // ✅ Redirect after login
+        console.log("📌 API Login Response:", loginResponse.data);
+
+        if (loginResponse.data?.token) {
+          localStorage.setItem("userToken", loginResponse.data.token);
+          setTimeout(() => navigate("/post-job"), 1000); // ✅ Redirect after short delay
         }
       }
 
       setMessage({ type: "success", text: isSignup ? "Signup successful! Redirecting..." : "Login successful!" });
-
     } catch (error) {
+      console.error("❌ API Error:", error.response?.data || error);
       setMessage({ type: "error", text: error.response?.data || "Something went wrong!" });
     } finally {
       setLoading(false);
@@ -66,7 +74,7 @@ const Login = () => {
     <Box
       sx={{
         height: "100vh",
-        backgroundColor: "#f0f0f0",
+        backgroundColor: "#f8f9fa",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -86,46 +94,46 @@ const Login = () => {
           Neighborly
         </Typography>
         <Typography variant="h6" gutterBottom>
-          {isSignup ? "Sign Up" : "Login"}
+          {isSignup ? "User Sign Up" : "User Login"}
         </Typography>
 
         {message && <Alert severity={message.type}>{message.text}</Alert>}
 
         <form onSubmit={handleAuth}>
           {isSignup && (
-            <TextField 
-              fullWidth 
-              label="Full Name" 
-              value={fullName} 
-              onChange={(e) => setFullName(e.target.value)} 
-              margin="normal" 
-              required 
+            <TextField
+              fullWidth
+              label="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              margin="normal"
+              required
             />
           )}
-          <TextField 
-            fullWidth 
-            label="Email" 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            margin="normal" 
-            required 
+          <TextField
+            fullWidth
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            margin="normal"
+            required
           />
-          <TextField 
-            fullWidth 
-            label="Password" 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            margin="normal" 
-            required 
+          <TextField
+            fullWidth
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            margin="normal"
+            required
           />
 
-          <Button 
-            variant="contained" 
-            color="primary" 
-            fullWidth 
-            sx={{ mt: 2 }} 
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2 }}
             type="submit"
             disabled={loading}
           >

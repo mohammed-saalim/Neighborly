@@ -38,8 +38,8 @@ const LoginJobs = () => {
           });
 
           if (loginResponse.data.token) {
-            localStorage.setItem("token", loginResponse.data.token); // ✅ Save JWT token
-            navigate("/post-job"); // ✅ Redirect to Post Job Page
+            localStorage.setItem("workerToken", loginResponse.data.token); // ✅ Save JWT token
+            navigate("/tasker-dashboard"); // ✅ Redirect to Post Job Page
           }
         }
       } else {
@@ -50,8 +50,8 @@ const LoginJobs = () => {
         });
 
         if (loginResponse.data.token) {
-          localStorage.setItem("token", loginResponse.data.token);
-          navigate("/post-job"); // ✅ Redirect after login
+          localStorage.setItem("workerToken", loginResponse.data.token);
+          navigate("/tasker-dashboard"); // ✅ Redirect after login
         }
       }
 

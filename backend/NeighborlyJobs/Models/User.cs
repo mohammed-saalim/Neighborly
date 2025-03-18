@@ -11,10 +11,12 @@ namespace Neighborly.Jobs.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
+        [JsonPropertyName("fullName")]
         public required string FullName { get; set; }
 
+        [JsonPropertyName("email")]
         public required string Email { get; set; }
-
+        
         [JsonPropertyName("passwordHash")]  // ✅ Ensures JSON maps to `passwordHash`
         public required string PasswordHash { get; set; }
 
