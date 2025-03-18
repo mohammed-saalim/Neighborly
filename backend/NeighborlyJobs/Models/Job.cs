@@ -8,16 +8,16 @@ namespace Neighborly.Jobs.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
         // public JobCategory Category { get; set; }
-        public DateTime DatePosted { get; set; }
-        public bool IsFilled { get; set; }
-        public decimal Price { get; set; }
+        public DateTime? DatePosted { get; set; }
+        public bool? IsFilled { get; set; }
+        public decimal? Price { get; set; }
         public required string Zipcode { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
     }
 
     public class JobCategory
@@ -34,10 +34,10 @@ namespace Neighborly.Jobs.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
     }
 
     

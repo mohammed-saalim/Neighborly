@@ -6,13 +6,15 @@ import Navbar from "./components/common/Navbar"; // Navbar component with the lo
 import Footer from "./components/common/Footer"; // Footer component
 import Home from "./pages/Home"; // Home page
 import Login from "./pages/Login"; // Customer Login page
-import Signup from "./pages/Signup"; // Signup page
 import PostJob from "./pages/PostJob"; // Post job page
 import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage";
+import TaskerProfilePage from "./pages/TaskerProfilePage";
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
 import Recommendations from "./pages/Recommendations"; // Import Recommendations page
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -26,13 +28,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} /> {/* Default route for the homepage */}
               <Route path="/login" element={<Login />} /> {/* Customer Login route */}
-              <Route path="/signup" element={<Signup />} /> {/* Signup route */}
-              <Route path="/post-job" element={<PostJob />} /> {/* Post job route */}
               <Route path="/login-jobs" element={<LoginJobs />} /> {/* NEW Worker Login route */}
-              <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} />
+              <Route path="/tasker-profile/:taskerId" element={<TaskerProfilePage />} />
               <Route path="/chat" element={<Chat currentUser="User1" chatPartner="User2" />} />
               <Route path="/task-form/:service" element={<TaskForm />} />
               <Route path="/recommendations" element={<Recommendations />} />
+              <Route path="/post-job" element={<ProtectedRoute element={<PostJob />} userType="user" />} />
+              <Route path="/tasker-dashboard" element={<ProtectedRoute element={<TaskerDashboardPage />} userType="worker" />} />
+              <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} userType="user" />} />
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}
@@ -43,4 +46,3 @@ function App() {
 }
 
 export default App;
-
