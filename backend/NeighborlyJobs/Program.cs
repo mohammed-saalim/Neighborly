@@ -68,13 +68,12 @@ builder.Services.AddCors(options =>
 });
 
 
+
 var app = builder.Build();
 
-// 🔹 Configure Middleware
-app.UseCors("CorsPolicy"); // Apply the CORS policy
-app.UseRouting();
 
 
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -95,6 +94,7 @@ app.UseAuthorization();
 // });
 
 app.MapControllers();
+
 app.MapJobEndpoints();
 app.MapAuthEndpoints(); // ✅ Register Authentication Routes
 app.MapWorkerAuthEndpoints();

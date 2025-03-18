@@ -32,7 +32,10 @@ namespace Neighborly.Jobs.Models
         public string? PickupLocation { get; set; }
         public string? DropoffLocation { get; set; }
         public int? NumItems { get; set; } // Only for moving
+<<<<<<< HEAD
 >>>>>>> 7317958 (latest)
+=======
+>>>>>>> origin/unit-test
     }
 
     public class JobCategory
