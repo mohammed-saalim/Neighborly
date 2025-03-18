@@ -17,10 +17,7 @@ namespace Neighborly.Jobs.Models
         public decimal? Price { get; set; }
         public required string Zipcode { get; set; }
 
-<<<<<<< HEAD
         public string? Address { get; set; }
-=======
-        public string Address { get; set; }
 
         // New fields for tasks
         public string? TaskSize { get; set; } // Small, Medium, Large
@@ -32,10 +29,7 @@ namespace Neighborly.Jobs.Models
         public string? PickupLocation { get; set; }
         public string? DropoffLocation { get; set; }
         public int? NumItems { get; set; } // Only for moving
-<<<<<<< HEAD
->>>>>>> 7317958 (latest)
-=======
->>>>>>> origin/unit-test
+
     }
 
     public class JobCategory
