@@ -18,8 +18,10 @@ const Chat = ({ currentUser, chatPartner }) => {
     useEffect(() => {
         if (!currentUser || !chatPartner) return;
 
+        setMessages([]);
+
         const conn = connectToChat((sender, message) => {
-            setMessages(prevMessages => [...prevMessages, { sender, message }]);
+            setMessages(prevMessages => [...prevMessages, { sender, message, timestamp: new Date().toLocaleTimeString() }]);
             scrollToBottom();
         });
         setConnection(conn);
@@ -41,6 +43,8 @@ const Chat = ({ currentUser, chatPartner }) => {
         if (newMessage.trim() === "") return;
 
         const timestamp = new Date().toLocaleTimeString();
+        const newMsg = { sender: currentUser, message: newMessage, timestamp };
+
         await sendMessage(connection, currentUser, chatPartner, newMessage);
         setMessages([...messages, { sender: currentUser, message: newMessage }]);
         setNewMessage("");
@@ -67,7 +71,12 @@ const Chat = ({ currentUser, chatPartner }) => {
                             onClick={() => setSelectedContact(contact)}
                         >
                             <img src={contact.avatar} alt={contact.name} className="contact-avatar" />
-                            <span>{contact.name}</span>
+                            <div className="contact-info">
+                                <span className="contact-name">{contact.name}</span>
+                                <span className="last-message">
+                                    {messages.length > 0 ? messages[messages.length - 1].message : "No messages"}
+                                </span>
+                            </div>
                         </div>
                     ))}
                 </div>

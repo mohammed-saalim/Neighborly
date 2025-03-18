@@ -9,6 +9,7 @@ namespace Neighborly.Jobs.ServiceProvider.Interface{
         Task<IEnumerable<JobCategoryDto>> GetJobsAsync();
         Task AddJobAsync(JobDto jobDto);
         Task AddJobCategoryAsync(JobCategoryDto jobDto);
+        Task AddTaskAsync(TaskDto taskDto);
     }
 
 

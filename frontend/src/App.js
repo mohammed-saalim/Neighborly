@@ -12,10 +12,11 @@ import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 import TaskerProfilePage from "./pages/TaskerProfilePage"; 
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
+import MovingTaskForm from "./components/MovingTaskForm";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>  <Route path="/task-form/moving" element={<MovingTaskForm />} />
       <CssBaseline /> {/* Ensures consistent baseline styles across browsers */}
       <Router>
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -31,7 +32,7 @@ function App() {
               <Route path="/tasker-profile/:taskerId" element={<TaskerProfilePage />} />
               <Route path="/chat" element={<Chat currentUser="User1" chatPartner="User2" />} />
               <Route path="/task-form/:service" element={<TaskForm />} />
-
+              <Route path="/task-form/moving" element={<MovingTaskForm />} />
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}

@@ -38,7 +38,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// 🔹 Add services to the container
+
+var builder = WebApplication.CreateBuilder(args);
+
+
+// Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -63,9 +67,14 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 var app = builder.Build();
 
 // 🔹 Configure Middleware
+app.UseCors("CorsPolicy"); // Apply the CORS policy
+app.UseRouting();
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -80,6 +89,12 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
+// app.MapGet("/", () =>
+// {
+//     return "Jurgen Klopp - From Doubters to Believers!";
+// });
+
+app.MapControllers();
 app.MapJobEndpoints();
 app.MapAuthEndpoints(); // ✅ Register Authentication Routes
 app.MapWorkerAuthEndpoints();

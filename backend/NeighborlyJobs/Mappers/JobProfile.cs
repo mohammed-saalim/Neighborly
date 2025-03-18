@@ -29,6 +29,15 @@ namespace Neighborly.Jobs.Mappers
                     .ForMember(dest => dest.Zipcode, opt => opt.MapFrom(src => src.Zipcode))
                     .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price));
                     // .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
+        
+        CreateMap<TaskDto, Job>()
+    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+    .ForMember(dest => dest.Zipcode, opt => opt.MapFrom(src => src.Zipcode))
+    .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+    .ForMember(dest => dest.DatePosted, opt => opt.MapFrom(src => DateTime.UtcNow))
+    .ForMember(dest => dest.IsFilled, opt => opt.MapFrom(src => false)); // Default value
+
         }
     }
 }
