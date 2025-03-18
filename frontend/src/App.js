@@ -13,6 +13,7 @@ import TaskerProfilePage from "./pages/TaskerProfilePage";
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
               <Route path="/task-form/:service" element={<TaskForm />} />
               <Route path="/post-job" element={<ProtectedRoute element={<PostJob />} userType="user" />} />
               <Route path="/tasker-dashboard" element={<ProtectedRoute element={<TaskerDashboardPage />} userType="worker" />} />
+              <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} userType="user" />} />
+
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}
