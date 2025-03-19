@@ -1,45 +1,31 @@
-using Neighborly.Jobs.Models;
-using Neighborly.Jobs.DTOs;
-using AutoMapper;
 using MongoDB.Driver;
-using Neighborly.Jobs.ServiceProvider.Interface;
-using Neighborly.Jobs.ServiceProvider;
+using Neighborly.Jobs.Models;
 
 namespace Neighborly.Jobs.ServiceProvider
 {
-    
-
-    public class JobsServiceProvider : IJobsServiceProvider
+    public class JobServiceProvider
     {
-        private readonly IMongoCollection<JobCategory> _jobCategory;
-        private readonly IMongoCollection<Job> _job;
-        private readonly IMapper _mapper;
+        private readonly IMongoCollection<Job> _jobs;
 
-        public JobsServiceProvider(DbServiceProvider context, IMapper mapper)
+        public JobServiceProvider(DbServiceProvider dbServiceProvider)
         {
-            _jobCategory = context.JobCategory;
-            _job = context.Jobs;
-            _mapper = mapper;
+            _jobs = dbServiceProvider.Jobs;
         }
 
-        public async Task<IEnumerable<JobCategoryDto>> GetJobsAsync()
-        {
-            var jobs = await _jobCategory.Find(job => true).ToListAsync();
-            return _mapper.Map<IEnumerable<JobCategoryDto>>(jobs);
-        }
+        // ✅ Insert a new job into the database
+        public async Task InsertJob(Job job) =>
+            await _jobs.InsertOneAsync(job);
 
-        public async Task AddJobCategoryAsync(JobCategoryDto jobDto)
-        {
-            var job = _mapper.Map<JobCategory>(jobDto);
-            await _jobCategory.InsertOneAsync(job);
-            
-        }
+        // ✅ Retrieve all jobs
+        public List<Job> GetAllJobs() =>
+            _jobs.Find(_ => true).ToList();
 
+        // ✅ Retrieve a specific job by ID
+        public Job? GetJobById(string jobId) =>
+            _jobs.Find(j => j.Id == jobId).FirstOrDefault();
 
-        public async Task AddJobAsync(JobDto jobDto)
-        {
-            var job = _mapper.Map<Job>(jobDto);
-            await _job.InsertOneAsync(job);
-        }
+        // ✅ Retrieve jobs posted by a specific user
+        public List<Job> GetJobsByUserId(string userId) =>
+            _jobs.Find(j => j.UserId == userId).ToList();
     }
 }

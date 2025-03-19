@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Neighborly.Jobs.Models;
+using System.Text.Json.Serialization;
 
 namespace Neighborly.Jobs.Models
 {
@@ -9,36 +9,23 @@ namespace Neighborly.Jobs.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        // public JobCategory Category { get; set; }
-        public DateTime? DatePosted { get; set; }
-        public bool? IsFilled { get; set; }
-        public decimal? Price { get; set; }
-        public required string Zipcode { get; set; }
 
-        public string? Address { get; set; }
+        [JsonPropertyName("userId")]
+        public string UserId { get; set; } = string.Empty;
+
+        [JsonPropertyName("jobCategory")]
+        public string JobCategory { get; set; } = "Other"; // Default category
+
+        [JsonPropertyName("jobDescription")]
+        public string JobDescription { get; set; } = string.Empty;
+
+        [JsonPropertyName("address")]
+        public string Address { get; set; } = string.Empty;
+
+        [JsonPropertyName("phone")]
+        public string Phone { get; set; } = string.Empty;
+
+        [JsonPropertyName("postedAt")]
+        public DateTime PostedAt { get; set; } = DateTime.UtcNow;
     }
-
-    public class JobCategory
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = string.Empty;
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public List<string>? Skills { get; set; } 
-    }
-
-     public class JobPoster
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
-        public string? Name { get; set; }
-        public string? Email { get; set; }
-        public string? Phone { get; set; }
-    }
-
-    
 }

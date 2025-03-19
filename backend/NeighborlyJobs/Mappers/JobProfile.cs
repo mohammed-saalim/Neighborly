@@ -1,6 +1,5 @@
 using AutoMapper;
 using Neighborly.Jobs.Models;
-using Neighborly.Jobs.DTOs;
 
 namespace Neighborly.Jobs.Mappers
 {
@@ -8,27 +7,17 @@ namespace Neighborly.Jobs.Mappers
     {
         public JobProfile()
         {
-            CreateMap<JobCategoryDto, JobCategory>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.Skills))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
-            CreateMap<JobCategory, JobCategoryDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+            // CreateMap<JobCategory, JobCategory>()
+            //     .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            //     .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.Skills))
+            //     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-                CreateMap<JobDto, Job>()
-                    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                    // .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
-                    .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-                    .ForMember(dest => dest.DatePosted, opt => opt.MapFrom(src => src.DatePosted))
-                    .ForMember(dest => dest.Zipcode, opt => opt.MapFrom(src => src.Zipcode));
-                CreateMap<Job, JobDto>()
-                    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                    .ForMember(dest => dest.Zipcode, opt => opt.MapFrom(src => src.Zipcode))
-                    .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price));
-                    // .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
+            CreateMap<Job, Job>()
+                .ForMember(dest => dest.JobCategory, opt => opt.MapFrom(src => src.JobCategory))
+                .ForMember(dest => dest.JobDescription, opt => opt.MapFrom(src => src.JobDescription))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.PostedAt, opt => opt.MapFrom(src => src.PostedAt));
         }
     }
 }

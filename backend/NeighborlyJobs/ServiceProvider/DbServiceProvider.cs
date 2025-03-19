@@ -16,9 +16,9 @@ namespace Neighborly.Jobs.ServiceProvider
 
         public IMongoCollection<Job> Jobs => _database.GetCollection<Job>("Jobs");
         
-        public IMongoCollection<JobCategory> JobCategory => _database.GetCollection<JobCategory>("JobCategory");
+        // public IMongoCollection<JobCategory> JobCategory => _database.GetCollection<JobCategory>("JobCategory");
 
-        public IMongoCollection<JobPoster> JobPosters => _database.GetCollection<JobPoster>("JobPosters");
+        // public IMongoCollection<JobPoster> JobPosters => _database.GetCollection<JobPoster>("JobPosters");
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
 

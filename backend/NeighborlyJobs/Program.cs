@@ -1,6 +1,5 @@
 using Neighborly.Jobs.ServiceProvider;
-using Neighborly.Jobs.ServiceProvider.Interface;
-using Neighborly.Jobs.RequestHandler;
+// using Neighborly.Jobs.RequestHandler;
 using Neighborly.Auth.RequestHandler;
 using Neighborly.Jobs.Endpoints;
 using Neighborly.Auth.Endpoints;
@@ -85,11 +84,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DbServiceProvider>();
 builder.Services.AddSingleton<UserServiceProvider>();
 builder.Services.AddScoped<AuthRequestHandler>();
-builder.Services.AddScoped<JobRequestHandler>();
+// builder.Services.AddScoped<JobRequestHandler>();
 builder.Services.AddSingleton<JwtService>(); 
-builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
+builder.Services.AddSingleton<JobServiceProvider>();
+// builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
 builder.Services.AddSingleton<WorkerServiceProvider>();
 builder.Services.AddScoped<WorkerAuthRequestHandler>();
+// builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>(); // ✅ Fixes DI issue
+// builder.Services.AddScoped<JobRequestHandler>(); // ✅ Ensure this is registered
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
 
