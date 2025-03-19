@@ -90,6 +90,8 @@ builder.Services.AddSingleton<JobServiceProvider>();
 // builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>();
 builder.Services.AddSingleton<WorkerServiceProvider>();
 builder.Services.AddScoped<WorkerAuthRequestHandler>();
+builder.Services.AddSingleton<JobRequestServiceProvider>();
+
 // builder.Services.AddScoped<IJobsServiceProvider, JobsServiceProvider>(); // ✅ Fixes DI issue
 // builder.Services.AddScoped<JobRequestHandler>(); // ✅ Ensure this is registered
 
@@ -129,7 +131,9 @@ app.UseAuthorization();
 
 app.MapJobEndpoints();
 app.MapAuthEndpoints(); 
-app.MapWorkerAuthEndpoints();
+app.MapWorkerEndpoints();
 app.MapUserEndpoints();
+app.MapJobRequestEndpoints();
+
 
 app.Run();

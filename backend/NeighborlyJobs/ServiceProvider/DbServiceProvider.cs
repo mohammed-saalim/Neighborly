@@ -23,6 +23,8 @@ namespace Neighborly.Jobs.ServiceProvider
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
 
         public IMongoCollection<Worker> Workers => _database.GetCollection<Worker>("Workers"); 
+
+        public IMongoCollection<JobRequest> JobRequests => _database.GetCollection<JobRequest>("JobRequests"); 
         
     }
 }
