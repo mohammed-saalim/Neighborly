@@ -80,9 +80,15 @@ function PostJob() {
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Paper
                 className="service-card"
-                onClick={() =>
-                  service.name === "All Services" ? setOpenModal(true) : navigate(`/task-form/${service.name.toLowerCase()}`)
-                }
+                onClick={() => {
+                  if (service.name === "Moving") {
+                    navigate("/moving-task");
+                  } else if (service.name === "All Services") {
+                    setOpenModal(true);
+                  } else {
+                    navigate(`/task-form/${service.name.toLowerCase()}`);
+                  }
+                }}
               >
                 <Box className="service-card-content">
                   {service.icon}
