@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Neighborly.Auth.Middleware; 
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,12 +41,23 @@ builder.Services.AddAuthentication(options =>
 
     options.Events = new JwtBearerEvents
     {
-        OnAuthenticationFailed = context =>
+    OnAuthenticationFailed = context =>
+    {
+        Console.WriteLine($"JWT Authentication Failed: {context.Exception.Message}");
+        return Task.CompletedTask;
+    },
+    OnTokenValidated = context =>
+    {
+        var expClaim = context.Principal.FindFirst(JwtRegisteredClaimNames.Exp);
+        if (expClaim != null)
         {
-            Console.WriteLine($"JWT Authentication Failed: {context.Exception.Message}");
-            return Task.CompletedTask;
+            var expDate = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expClaim.Value));
+            Console.WriteLine($"🔑 Token Expiration Time (UTC): {expDate}");
         }
-    };
+        return Task.CompletedTask;
+    }
+};
+
 });
 
 //some issue

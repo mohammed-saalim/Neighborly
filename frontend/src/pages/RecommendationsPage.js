@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Typography, Avatar, Button, Grid, Box } from "@mui/material";
+import { Card, CardContent, Typography, Avatar, Button, Grid, Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const RecommendationsPage = () => {
   const [workers, setWorkers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5083/api/workers/recommendations") // ✅ Backend API for workers
+    fetch("http://localhost:5083/api/workers/recommendations") // ✅ Backend API for fetching workers
       .then((response) => response.json())
       .then((data) => setWorkers(data))
-      .catch((error) => console.error("Error fetching workers:", error));
+      .catch((error) => console.error("Error fetching workers:", error))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleViewProfile = (workerId) => {
     navigate(`/worker-profile/${workerId}`); // ✅ Redirect to worker profile
   };
 
-  const handleSelectWorker = (workerId) => {
-    navigate(`/job-request/${workerId}`); // ✅ Redirect to job request form
+  const handleSelectWorker = (worker) => {
+    const userToken = localStorage.getItem("userToken");
+    if (!userToken) {
+      alert("Please log in to continue.");
+      navigate("/login"); // ✅ Redirect to login if user is not logged in
+      return;
+    }
+
+    console.log("Selected Worker:", worker); // ✅ Debugging - Ensure correct worker data is passed
+
+    navigate("/job-request", { state: { worker } }); // ✅ Pass worker object via state
   };
+
+  if (loading) {
+    return <CircularProgress sx={{ display: "block", margin: "auto", mt: 5 }} />;
+  }
 
   return (
     <Box sx={{ p: 5, backgroundColor: "#f9f9f9", minHeight: "100vh" }}>
@@ -33,7 +48,7 @@ const RecommendationsPage = () => {
             <Card sx={{ p: 2, borderRadius: 3, boxShadow: 3 }}>
               <CardContent>
                 <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                  <Avatar sx={{ width: 60, height: 60, mr: 2 }} />
+                  <Avatar sx={{ width: 60, height: 60, mr: 2 }}>{worker.fullName.charAt(0)}</Avatar>
                   <Box>
                     <Typography variant="h6" fontWeight="bold">{worker.fullName}</Typography>
                     <Typography variant="body2" color="gray">⭐ {worker.rating} / 5.0</Typography>
@@ -52,7 +67,7 @@ const RecommendationsPage = () => {
                   <Button variant="outlined" color="primary" onClick={() => handleViewProfile(worker.id)}>
                     View Profile
                   </Button>
-                  <Button variant="contained" color="success" onClick={() => handleSelectWorker(worker.id)}>
+                  <Button variant="contained" color="success" onClick={() => handleSelectWorker(worker)}>
                     Select & Continue
                   </Button>
                 </Box>

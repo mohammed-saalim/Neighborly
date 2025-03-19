@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Box, Container, Typography, Button, Modal, Grid, Paper, TextField, InputAdornment } from "@mui/material";
+import { 
+  Box, Container, Typography, Button, Modal, Grid, Paper, TextField, InputAdornment 
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search"; // Search Icon
 import AdCarousel from "../components/common/AdCarousel";
 import "../styles/PostJob.css";
@@ -57,7 +59,7 @@ function PostJob() {
           What are you looking for?
         </Typography>
 
-        {/* Search Bar  */}
+        {/* Search Bar */}
         <Box className="search-bar-container">
           <TextField
             variant="outlined"
@@ -74,20 +76,14 @@ function PostJob() {
           />
         </Box>
 
-        {/* Services Grid - 4 Columns, 3 Rows */}
+        {/* Services Grid */}
         <Grid container spacing={3} className="services-grid">
           {coreServices.map((service, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Paper
                 className="service-card"
                 onClick={() => {
-                  if (service.name === "Moving") {
-                    navigate("/moving-task");
-                  } else if (service.name === "All Services") {
-                    setOpenModal(true);
-                  } else {
-                    navigate(`/task-form/${service.name.toLowerCase()}`);
-                  }
+                  navigate(`/recommendations?service=${encodeURIComponent(service.name)}`);
                 }}
               >
                 <Box className="service-card-content">
@@ -105,20 +101,18 @@ function PostJob() {
         {/* All Services Modal */}
         <Modal open={openModal} onClose={() => setOpenModal(false)}>
           <Box className="modal-container">
-          <Typography
-            variant="h5"
-            className="modal-title"
-            sx={{
+            <Typography
+              variant="h5"
+              className="modal-title"
+              sx={{
                 fontFamily: "'Playfair Display', serif",
                 fontWeight: "bold",
                 textAlign: "center",
-            }}
-         >
-          All Services
-
-        <CloseIcon className="close-icon" onClick={() => setOpenModal(false)} />  
-        </Typography>
-
+              }}
+            >
+              All Services
+              <CloseIcon className="close-icon" onClick={() => setOpenModal(false)} />
+            </Typography>
 
             {/* Full List of Services */}
             <Box className="services-list">
@@ -128,7 +122,7 @@ function PostJob() {
                   variant="contained"
                   className="service-btn"
                   onClick={() => {
-                    navigate(`/task-form/${service.toLowerCase()}`);
+                    navigate(`/recommendations?service=${encodeURIComponent(service)}`);
                     setOpenModal(false);
                   }}
                 >
@@ -136,7 +130,6 @@ function PostJob() {
                 </Button>
               ))}
             </Box>
-
           </Box>
         </Modal>
       </Container>

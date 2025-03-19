@@ -11,6 +11,7 @@ import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 import TaskerProfilePage from "./pages/TaskerProfilePage"; 
 import RecommendationsPage from "./pages/RecommendationsPage"; // ✅ Import Recommendations Page
+import JobRequestForm from "./pages/JobRequestForm"; // ✅ Import Job Request Form Page
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
 import MovingTaskForm from "./components/MovingTaskForm";
@@ -29,19 +30,24 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} /> {/* Default route for the homepage */}
               <Route path="/login" element={<Login />} /> {/* Customer Login route */}
-              {/* <Route path="/post-job" element={<PostJob />} /> Post job route */}
               <Route path="/login-jobs" element={<LoginJobs />} /> {/* NEW Worker Login route */}
-              {/* <Route path="/tasker-dashboard" element={<TaskerDashboardPage />} /> */}
               <Route path="/tasker-profile/:taskerId" element={<TaskerProfilePage />} />
               <Route path="/chat" element={<Chat currentUser="User1" chatPartner="User2" />} />
               <Route path="/task-form/:service" element={<TaskForm />} />
               <Route path="/moving-task" element={<MovingTaskForm />} />
+
+              {/* ✅ Protect Job Posting and Tasker Dashboard */}
               <Route path="/post-job" element={<ProtectedRoute element={<PostJob />} userType="user" />} />
               <Route path="/tasker-dashboard" element={<ProtectedRoute element={<TaskerDashboardPage />} userType="worker" />} />
               <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} userType="user" />} />
 
               {/* ✅ Protect Recommendations Page - Only logged-in users can see it */}
               <Route path="/recommendations" element={<ProtectedRoute element={<RecommendationsPage />} userType="user" />} /> 
+
+              {/* ✅ Protect Job Request Form - Only logged-in users can send a job request */}
+              <Route path="/job-request" element={<ProtectedRoute element={<JobRequestForm />} userType="user" />} />
+
+
 
             </Routes>
           </main>

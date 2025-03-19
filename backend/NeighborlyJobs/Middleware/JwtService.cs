@@ -35,7 +35,7 @@ namespace Neighborly.Auth.Middleware // ✅ Ensure correct namespace
                 _issuer,
                 _audience,
                 claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: DateTime.UtcNow.AddHours(12),
                 signingCredentials: credentials
             );
 

@@ -21,6 +21,7 @@ const TaskerProfilePage = () => {
   const API_PROFILE_URL = "http://localhost:5083/api/worker/profile";
   const API_ONGOING_TASKS = "http://localhost:5083/api/jobrequests/worker/inprogress";
   const API_COMPLETED_TASKS = "http://localhost:5083/api/jobrequests/worker/completed";
+  const API_MARK_COMPLETED = "http://localhost:5083/api/jobrequests"; // ✅ Base URL for completion
 
   useEffect(() => {
     const fetchWorkerProfile = async () => {
@@ -66,6 +67,11 @@ const TaskerProfilePage = () => {
     fetchCompletedTasks();
   }, []);
 
+  // ✅ Fix controlled input warning by ensuring default values
+  const handleChange = (e) => {
+    setWorker({ ...worker, [e.target.name]: e.target.value || "" });
+  };
+
   const handleUpdateProfile = async () => {
     try {
       const token = localStorage.getItem("workerToken");
@@ -80,10 +86,6 @@ const TaskerProfilePage = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setWorker({ ...worker, [e.target.name]: e.target.value });
-  };
-
   const toggleAvailability = () => {
     setWorker({ ...worker, availability: !worker.availability });
   };
@@ -92,6 +94,23 @@ const TaskerProfilePage = () => {
     if (newSkill.trim() !== "") {
       setWorker({ ...worker, skills: [...worker.skills, newSkill.trim()] });
       setNewSkill("");
+    }
+  };
+
+  // ✅ Handle marking job as completed
+  const handleMarkCompleted = async (taskId) => {
+    try {
+      const token = localStorage.getItem("workerToken");
+      await axios.put(`${API_MARK_COMPLETED}/${taskId}/complete`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      alert("✅ Task marked as completed!");
+      setOngoingTasks((prev) => prev.filter(task => task.id !== taskId));
+      setCompletedTasks((prev) => [...prev, ...ongoingTasks.filter(task => task.id === taskId)]);
+    } catch (error) {
+      console.error("Error marking task as completed:", error);
+      alert("❌ Failed to mark task as completed.");
     }
   };
 
@@ -132,64 +151,37 @@ const TaskerProfilePage = () => {
               <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
                 <Avatar src={worker.image || "/assets/default-avatar.png"} alt={worker.fullName} 
                         sx={{ width: 100, height: 100, border: "3px solid #1976d2", mb: 1 }} />
-                {editing ? (
-                  <TextField 
-                    name="fullName" 
-                    value={worker.fullName} 
-                    onChange={handleChange} 
-                    variant="outlined" 
-                    size="small" 
-                    sx={{ textAlign: "center", mt: 1 }} 
-                  />
-                ) : (
-                  <Typography variant="h6" fontWeight="bold" sx={{ mt: 1 }}>{worker.fullName}</Typography>
-                )}
+                <Typography variant="h6" fontWeight="bold" sx={{ mt: 1 }}>{worker.fullName}</Typography>
                 <Typography variant="body2" color="gray">⭐ {worker.rating} ({worker.completedJobs} jobs completed)</Typography>
               </Box>
 
               {/* Editable Fields */}
               <Typography variant="body2" fontWeight="bold" color="primary">Bio:</Typography>
-              {editing ? (
-                <TextField name="summary" value={worker.summary} onChange={handleChange} fullWidth multiline rows={2} sx={{ mb: 2 }} />
-              ) : (
-                <Typography variant="body1" sx={{ color: "gray", mb: 2 }}>{worker.summary}</Typography>
-              )}
-
-              {/* Additional Editable Fields */}
-              <Typography variant="body2" color="gray">📍 Location: {editing ? <TextField name="address" value={worker.address} onChange={handleChange} fullWidth size="small"/> : worker.address}</Typography>
-              <Typography variant="body2" color="gray">💰 Hourly Rate: {editing ? <TextField name="hourlyRate" value={worker.hourlyRate} onChange={handleChange} fullWidth size="small"/> : `$${worker.hourlyRate}/hr`}</Typography>
-              <Typography variant="body2" color="gray">📧 Contact: {editing ? <TextField name="contact" value={worker.contact} onChange={handleChange} fullWidth size="small"/> : worker.contact}</Typography>
+              <TextField name="summary" value={worker.summary || ""} onChange={handleChange} fullWidth multiline rows={2} sx={{ mb: 2 }} />
 
               {/* Availability Toggle */}
               <Typography variant="body2" color="gray">🟢 Availability: 
-                {editing ? (
-                  <Switch checked={worker.availability} onChange={toggleAvailability} />
-                ) : (
-                  worker.availability ? " Available" : " Unavailable"
-                )}
+                <Switch checked={worker.availability} onChange={toggleAvailability} />
               </Typography>
 
               {editing && <Button variant="contained" color="success" onClick={handleUpdateProfile} sx={{ mt: 2 }}>Save Changes</Button>}
             </>
           )}
 
-          {/* Completed Tasks Tab */}
-          {activeTab === 2 && (
+          {/* Ongoing Tasks Tab */}
+          {activeTab === 1 && (
             <Box sx={{ mt: 2 }}>
-              <Typography variant="h6" color="primary">Completed Jobs</Typography>
+              <Typography variant="h6" color="primary">Ongoing Jobs</Typography>
               <Divider sx={{ mb: 2 }} />
-              {completedTasks.length === 0 ? (
-                <Typography>No completed jobs.</Typography>
-              ) : (
-                completedTasks.map((task, index) => (
-                  <Paper key={index} sx={{ p: 2, mb: 2 }}>
-                    <Typography><strong>Job:</strong> {task.jobDescription}</Typography>
-                    <Typography><strong>Client:</strong> {task.fullName}</Typography>
-                    <Typography><strong>Price:</strong> ${task.price || "N/A"}</Typography>
-                    <Typography><strong>Date:</strong> {new Date(task.jobDateTime).toDateString()}</Typography>
-                  </Paper>
-                ))
-              )}
+              {ongoingTasks.map((task, index) => (
+                <Paper key={index} sx={{ p: 2, mb: 2 }}>
+                  <Typography><strong>Job:</strong> {task.jobDescription}</Typography>
+                  <Typography><strong>Client:</strong> {task.fullName}</Typography>
+                  <Button variant="contained" color="success" onClick={() => handleMarkCompleted(task.id)}>
+                    Mark as Completed
+                  </Button>
+                </Paper>
+              ))}
             </Box>
           )}
         </CardContent>
