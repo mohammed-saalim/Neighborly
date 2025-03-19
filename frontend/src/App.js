@@ -10,10 +10,11 @@ import PostJob from "./pages/PostJob"; // Post job page
 import LoginJobs from "./pages/LoginJobs"; // NEW Worker Login Page
 import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 import TaskerProfilePage from "./pages/TaskerProfilePage"; 
+import RecommendationsPage from "./pages/RecommendationsPage"; // ✅ Import Recommendations Page
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
 import MovingTaskForm from "./components/MovingTaskForm";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute"; // ✅ Import Protected Route
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
               <Route path="/tasker-dashboard" element={<ProtectedRoute element={<TaskerDashboardPage />} userType="worker" />} />
               <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} userType="user" />} />
 
+              {/* ✅ Protect Recommendations Page - Only logged-in users can see it */}
+              <Route path="/recommendations" element={<ProtectedRoute element={<RecommendationsPage />} userType="user" />} /> 
+
             </Routes>
           </main>
           <Footer /> {/* Footer component, remains at the bottom */}
@@ -49,4 +53,3 @@ function App() {
 }
 
 export default App;
-
