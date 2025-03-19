@@ -45,6 +45,67 @@ namespace Neighborly.Jobs.Endpoints
                 var jobRequests = _jobRequestService.GetJobRequestsForWorker(workerId);
                 return Results.Ok(jobRequests);
             });
+
+            // ✅ Accept Job Request (Worker)
+            routes.MapPut("/api/jobrequests/{jobRequestId}/accept", [Authorize] (HttpContext http, string jobRequestId, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var workerId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(workerId)) return Results.Unauthorized();
+
+                var success = _jobRequestService.AcceptJobRequest(jobRequestId);
+                return success ? Results.Ok("Job request accepted and now in progress.") : Results.NotFound("Job request not found.");
+            });
+
+            // ✅ Reject Job Request (Worker)
+            routes.MapPut("/api/jobrequests/{jobRequestId}/reject", [Authorize] (HttpContext http, string jobRequestId, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var workerId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(workerId)) return Results.Unauthorized();
+
+                var success = _jobRequestService.RejectJobRequest(jobRequestId);
+                return success ? Results.Ok("Job request rejected.") : Results.NotFound("Job request not found.");
+            });
+
+            // ✅ Complete Job Request (User Confirms Completion)
+            routes.MapPut("/api/jobrequests/{jobRequestId}/complete", [Authorize] (HttpContext http, string jobRequestId, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var userId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId)) return Results.Unauthorized();
+
+                var success = _jobRequestService.CompleteJobRequest(jobRequestId);
+                return success ? Results.Ok("Job marked as completed.") : Results.NotFound("Job request not found.");
+            });
+
+            // ✅ Get In-Progress Jobs (Worker)
+            routes.MapGet("/api/jobrequests/worker/inprogress", [Authorize] (HttpContext http, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var workerId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(workerId)) return Results.Unauthorized();
+
+                var jobs = _jobRequestService.GetInProgressJobsForWorker(workerId);
+                return Results.Ok(jobs);
+            });
+
+            // ✅ Get Completed Jobs (Worker)
+            routes.MapGet("/api/jobrequests/worker/completed", [Authorize] (HttpContext http, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var workerId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(workerId)) return Results.Unauthorized();
+
+                var jobs = _jobRequestService.GetCompletedJobsForWorker(workerId);
+                return Results.Ok(jobs);
+            });
+
+            // ✅ Get Completed Jobs (User)
+            routes.MapGet("/api/jobrequests/user/completed", [Authorize] (HttpContext http, JobRequestServiceProvider _jobRequestService) =>
+            {
+                var userId = http.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId)) return Results.Unauthorized();
+
+                var jobs = _jobRequestService.GetCompletedJobsForUser(userId);
+                return Results.Ok(jobs);
+            });
+
         }
     }
 }
