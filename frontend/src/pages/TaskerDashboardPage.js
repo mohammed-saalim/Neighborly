@@ -13,11 +13,13 @@ const TaskerDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [jobRequests, setJobRequests] = useState([]);
   const [ongoingJobs, setOngoingJobs] = useState([]);
+  const [completedJobs, setCompletedJobs] = useState([]);
   const [available, setAvailable] = useState(true);
   const workerToken = localStorage.getItem("workerToken");
 
   const API_JOB_REQUESTS = "http://localhost:5083/api/jobrequest/worker";
   const API_ONGOING_JOBS = "http://localhost:5083/api/jobrequests/worker/inprogress";
+  const API_COMPLETED_JOBS = "http://localhost:5083/api/jobrequests/worker/completed";
 
   useEffect(() => {
     if (!workerToken) {
@@ -51,8 +53,20 @@ const TaskerDashboardPage = () => {
       }
     };
 
+    const fetchCompletedJobs = async () => {
+      try {
+        const response = await axios.get(API_COMPLETED_JOBS, {
+          headers: { Authorization: `Bearer ${workerToken}` },
+        });
+        setCompletedJobs(response.data);
+      } catch (error) {
+        console.error("Error fetching completed jobs:", error);
+      }
+    };
+
     fetchJobRequests();
     fetchOngoingJobs();
+    fetchCompletedJobs();
   }, [workerToken, navigate]);
 
   const handleAccept = async (taskId) => {
@@ -149,6 +163,31 @@ const TaskerDashboardPage = () => {
               )}
             </CardContent>
           </Card>
+
+          {/* ✅ NEW SECTION: Completed Jobs */}
+        <Card sx={{ mb: 3, p: 2 }}>
+          <CardContent>
+            <Typography variant="h6" fontWeight="bold" color="primary">
+              Completed Jobs
+            </Typography>
+            <Divider sx={{ my: 1 }} />
+            {completedJobs.length === 0 ? (
+              <Typography>No completed jobs.</Typography>
+            ) : (
+              <List>
+                {completedJobs.map((job) => (
+                  <ListItem key={job.id}>
+                    <ListItemText 
+                      primary={`${job.fullName} - ${job.jobDescription}`} 
+                      secondary={`Completed on: ${new Date(job.jobDateTime).toLocaleString()}`} 
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </CardContent>
+        </Card>
+
 
         </Grid>
 
