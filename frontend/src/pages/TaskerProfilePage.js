@@ -8,7 +8,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const TaskerProfilePage = () => {
   const theme = useTheme();
 
-  // Tasker Details (State)
   const [tasker, setTasker] = useState({
     name: "Alex T.",
     rating: 4.8,
@@ -26,15 +25,9 @@ const TaskerProfilePage = () => {
   const [editing, setEditing] = useState(false);
   const [newSkill, setNewSkill] = useState("");
 
-  // Toggle Edit Mode
   const toggleEdit = () => setEditing(!editing);
+  const handleChange = (e) => setTasker({ ...tasker, [e.target.name]: e.target.value });
 
-  // Update Profile Fields
-  const handleChange = (e) => {
-    setTasker({ ...tasker, [e.target.name]: e.target.value });
-  };
-
-  // Add New Skill
   const addSkill = () => {
     if (newSkill.trim() !== "") {
       setTasker({ ...tasker, skills: [...tasker.skills, newSkill.trim()] });
@@ -42,118 +35,83 @@ const TaskerProfilePage = () => {
     }
   };
 
-  // Remove Skill
   const removeSkill = (skillToRemove) => {
     setTasker({ ...tasker, skills: tasker.skills.filter(skill => skill !== skillToRemove) });
   };
 
   return (
-    <Box sx={{ backgroundColor: theme.palette.background.default, padding: "20px", minHeight: "100vh" }}>
-      <Card className="tasker-profile-card" sx={{ maxWidth: 700, margin: "auto", p: 3, boxShadow: 3 }}>
+    <Box sx={{ backgroundColor: "#f4f6f8", padding: "40px", minHeight: "100vh" }}>
+      <Card sx={{ 
+          maxWidth: 600, 
+          margin: "auto", 
+          p: 4, 
+          boxShadow: 5, 
+          borderRadius: "16px", 
+          background: "linear-gradient(to bottom, #ffffff, #f9fafb)" 
+        }}>
         <CardContent>
-          {/* Header with Edit Button */}
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-            <Typography variant="h5" sx={{ color: theme.palette.text.secondary }}>Tasker Profile</Typography>
+          {/* Header */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+            <Typography variant="h5" fontWeight="bold" color="primary">Tasker Profile</Typography>
             <IconButton onClick={toggleEdit} color="primary">
               <EditIcon />
             </IconButton>
           </Box>
 
           {/* Profile Image & Name */}
-          <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-            <Avatar src={tasker.image} alt={tasker.name} sx={{ width: 100, height: 100, mr: 2, backgroundColor: theme.palette.primary.main }} />
-            <Box>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
+            <Avatar src={tasker.image} alt={tasker.name} sx={{ width: 100, height: 100, border: "3px solid #1976d2" }} />
+            <Typography variant="h6" fontWeight="bold" sx={{ mt: 1 }}>
               {editing ? (
-                <TextField 
-                  name="name"
-                  value={tasker.name} 
-                  onChange={handleChange}
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                />
+                <TextField name="name" value={tasker.name} onChange={handleChange} variant="outlined" size="small" />
               ) : (
-                <Typography variant="h6" sx={{ color: theme.palette.text.secondary }}>{tasker.name}</Typography>
+                tasker.name
               )}
-              <Typography variant="body2" sx={{ color: theme.palette.text.primary }}>
-                ⭐ {tasker.rating} ({tasker.reviews} reviews)
-              </Typography>
-            </Box>
+            </Typography>
+            <Typography variant="body2" color="gray">
+              ⭐ {tasker.rating} ({tasker.reviews} reviews)
+            </Typography>
           </Box>
 
-          {/* Bio Section */}
-          <Typography variant="body2" fontWeight="bold">Bio:</Typography>
+          {/* Bio */}
+          <Typography variant="body2" fontWeight="bold" color="primary">Bio:</Typography>
           {editing ? (
-            <TextField
-              name="bio"
-              value={tasker.bio}
-              onChange={handleChange}
-              variant="outlined"
-              size="small"
-              fullWidth
-              multiline
-              rows={2}
-              sx={{ mb: 2 }}
-            />
+            <TextField name="bio" value={tasker.bio} onChange={handleChange} variant="outlined" size="small" fullWidth multiline rows={2} sx={{ mb: 2 }} />
           ) : (
-            <Typography variant="body1" sx={{ color: theme.palette.text.primary, mb: 2 }}>
-              {tasker.bio}
-            </Typography>
+            <Typography variant="body1" sx={{ color: "gray", mb: 2 }}>{tasker.bio}</Typography>
           )}
 
-          {/* Skills Section */}
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" fontWeight="bold">Skills:</Typography>
-            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
-              {tasker.skills.map((skill, index) => (
-                <Chip 
-                  key={index} 
-                  label={skill} 
-                  sx={{ backgroundColor: theme.palette.primary.main, color: "#fff" }} 
-                  onDelete={editing ? () => removeSkill(skill) : undefined}
-                />
-              ))}
-            </Box>
-            {editing && (
-              <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                <TextField
-                  value={newSkill}
-                  onChange={(e) => setNewSkill(e.target.value)}
-                  variant="outlined"
-                  size="small"
-                  placeholder="Add skill"
-                  sx={{ mr: 1 }}
-                />
-                <IconButton color="primary" onClick={addSkill}>
-                  <AddCircleOutlineIcon />
-                </IconButton>
-              </Box>
-            )}
+          {/* Skills */}
+          <Typography variant="body2" fontWeight="bold" color="primary">Skills:</Typography>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1, mb: 2 }}>
+            {tasker.skills.map((skill, index) => (
+              <Chip 
+                key={index} 
+                label={skill} 
+                sx={{ backgroundColor: "#1976d2", color: "#fff", borderRadius: "16px", px: 1.5, py: 0.5 }} 
+                onDelete={editing ? () => removeSkill(skill) : undefined}
+              />
+            ))}
           </Box>
+          {editing && (
+            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+              <TextField value={newSkill} onChange={(e) => setNewSkill(e.target.value)} variant="outlined" size="small" placeholder="Add skill" sx={{ mr: 1 }} />
+              <IconButton color="primary" onClick={addSkill}><AddCircleOutlineIcon /></IconButton>
+            </Box>
+          )}
 
           {/* Additional Info */}
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary, mb: 1 }}>
-            📍 Location: {editing ? <TextField name="location" value={tasker.location} onChange={handleChange} size="small" variant="outlined" /> : tasker.location}
-          </Typography>
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary, mb: 1 }}>
-            ✅ Completed Jobs: {tasker.completedJobs}
-          </Typography>
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary, mb: 1 }}>
-            💰 Hourly Rate: {editing ? <TextField name="hourlyRate" value={tasker.hourlyRate} onChange={handleChange} size="small" variant="outlined" /> : tasker.hourlyRate}
-          </Typography>
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary, mb: 1 }}>
-            🕒 Availability: {editing ? <TextField name="availability" value={tasker.availability} onChange={handleChange} size="small" variant="outlined" /> : tasker.availability ? "Available" : "Unavailable"}
-          </Typography>
+          <Typography variant="body2" color="gray">📍 Location: {editing ? <TextField name="location" value={tasker.location} onChange={handleChange} size="small" variant="outlined" /> : tasker.location}</Typography>
+          <Typography variant="body2" color="gray">✅ Completed Jobs: {tasker.completedJobs}</Typography>
+          <Typography variant="body2" color="gray">💰 Hourly Rate: {editing ? <TextField name="hourlyRate" value={tasker.hourlyRate} onChange={handleChange} size="small" variant="outlined" /> : tasker.hourlyRate}</Typography>
+          <Typography variant="body2" color="gray">🕒 Availability: {tasker.availability ? "Available" : "Unavailable"}</Typography>
+          <Typography variant="body2" color="gray">📧 Contact: {editing ? <TextField name="contact" value={tasker.contact} onChange={handleChange} size="small" variant="outlined" fullWidth /> : tasker.contact}</Typography>
 
-          {/* Contact Info */}
-          <Typography variant="body2" sx={{ color: theme.palette.text.primary, mb: 1 }}>
-            📧 Contact: {editing ? <TextField name="contact" value={tasker.contact} onChange={handleChange} size="small" variant="outlined" fullWidth /> : tasker.contact}
-          </Typography>
 
           {/* Save Changes Button */}
           {editing && (
-            <Box sx={{ textAlign: "center", mt: 2 }}>
-              <Button variant="contained" color="primary" onClick={toggleEdit}>Save Changes</Button>
+            <Box sx={{ textAlign: "center", mt: 3 }}>
+              <Button variant="contained" color="success" onClick={toggleEdit}>Save Changes</Button>
             </Box>
           )}
         </CardContent>
@@ -163,3 +121,4 @@ const TaskerProfilePage = () => {
 };
 
 export default TaskerProfilePage;
+

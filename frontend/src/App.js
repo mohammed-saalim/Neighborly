@@ -12,6 +12,7 @@ import TaskerDashboardPage from "./pages/TaskerDashboardPage";
 import TaskerProfilePage from "./pages/TaskerProfilePage"; 
 import Chat from "./components/Chat";
 import TaskForm from "./components/TaskForm";
+import MovingTaskForm from "./components/MovingTaskForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/ProfilePage";
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/tasker-profile/:taskerId" element={<TaskerProfilePage />} />
               <Route path="/chat" element={<Chat currentUser="User1" chatPartner="User2" />} />
               <Route path="/task-form/:service" element={<TaskForm />} />
+              <Route path="/moving-task" element={<MovingTaskForm />} />
               <Route path="/post-job" element={<ProtectedRoute element={<PostJob />} userType="user" />} />
               <Route path="/tasker-dashboard" element={<ProtectedRoute element={<TaskerDashboardPage />} userType="worker" />} />
               <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} userType="user" />} />
